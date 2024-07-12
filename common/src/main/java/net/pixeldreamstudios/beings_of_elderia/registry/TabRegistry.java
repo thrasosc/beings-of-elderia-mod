@@ -15,7 +15,7 @@ public class TabRegistry {
             "beings_of_elderia_tab", // Tab ID
             () -> CreativeTabRegistry.create(
                     Component.translatable("category.beings_of_elderia"), // Tab Name
-                    () -> new ItemStack(ItemRegistry.DEMON_SPAWN_EGG.get()) // Icon
+                    () -> new ItemStack(ItemRegistry.IMP_HEAD.get()) // Icon
             )
     );
 

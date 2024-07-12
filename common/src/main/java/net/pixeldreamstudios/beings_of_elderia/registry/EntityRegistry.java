@@ -39,13 +39,13 @@ public class EntityRegistry {
 
     private static void initSpawns() {
         SpawnPlacementsRegistry.register(EntityRegistry.DEMON, SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AbstractDemonEntity::checkAnyLightMonsterSpawnRules);
-        BiomeModifications.addProperties(b -> b.hasTag(BiomeTags.IS_NETHER), (ctx, b) -> b.getSpawnProperties().addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(DEMON.get(), 20, 1, 6)));
+        BiomeModifications.addProperties(b -> b.hasTag(BiomeTags.IS_NETHER), (ctx, b) -> b.getSpawnProperties().addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(DEMON.get(), 60, 6, 12)));
 
         SpawnPlacementsRegistry.register(EntityRegistry.IMP, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AbstractDemonEntity::checkAnyLightMonsterSpawnRules);
-        BiomeModifications.addProperties(b -> b.hasTag(BiomeTags.IS_NETHER), (ctx, b) -> b.getSpawnProperties().addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(IMP.get(), 10, 1, 6)));
+        BiomeModifications.addProperties(b -> b.hasTag(BiomeTags.IS_NETHER), (ctx, b) -> b.getSpawnProperties().addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(IMP.get(), 50, 2, 6)));
 
         SpawnPlacementsRegistry.register(EntityRegistry.IMP_GUARD, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AbstractDemonEntity::checkAnyLightMonsterSpawnRules);
-        BiomeModifications.addProperties(b -> b.hasTag(BiomeTags.IS_NETHER), (ctx, b) -> b.getSpawnProperties().addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(IMP_GUARD.get(), 10, 1, 6)));
+        BiomeModifications.addProperties(b -> b.hasTag(BiomeTags.IS_NETHER), (ctx, b) -> b.getSpawnProperties().addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(IMP_GUARD.get(), 40, 2, 6)));
     }
 
     private static void initAttributes() {

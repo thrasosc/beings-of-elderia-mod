@@ -1,0 +1,11 @@
+{
+  "category.beings_of_elderia": "Beings of Elderia",
+
+  "entity.beings_of_elderia.demon": "Demon",
+  "entity.beings_of_elderia.imp": "Imp",
+  "entity.beings_of_elderia.imp_guard": "Imp Guard",
+
+  "item.beings_of_elderia.demon_spawn_egg": "Demon Spawn Egg",
+  "item.beings_of_elderia.imp_spawn_egg": "Imp Spawn Egg",
+  "item.beings_of_elderia.imp_guard_spawn_egg": "Imp Guard Spawn Egg"
+}

@@ -3,15 +3,18 @@
   "id": "beings_of_elderia",
   "version": "${version}",
   "name": "Beings of Elderia",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "Discover a world where angels soar in the Aether and demons lurk in the Hell. Explore these mystical realms and encounter beings of immense power and ancient lore.",
   "authors": [
-    "Me!"
+    "lwkysad",
+    "kyber-6",
+    "Pixel Dream Studios"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://modrinth.com/mod/beings-of-elderia",
+    "sources": "https://github.com/kyber-6/beings-of-elderia-mod",
+    "issues": "https://github.com/kyber-6/beings-of-elderia-mod/issues"
   },
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "icon.png",
   "environment": "*",
   "entrypoints": {
@@ -33,8 +36,5 @@
     "fabric-api": "*",
     "azurelib": "2.0.30",
     "smartbrainlib": ">=1.14.2"
-  },
-  "suggests": {
-    "another-mod": "*"
   }
 }

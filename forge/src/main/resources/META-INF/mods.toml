@@ -1,16 +1,17 @@
 modLoader = "javafml"
 loaderVersion = "[47,)"
-#issueTrackerURL = ""
-license = "Insert License Here"
+issueTrackerURL = "https://github.com/kyber-6/beings-of-elderia-mod/issues"
+license = "MIT"
 
 [[mods]]
 modId = "beings_of_elderia"
 version = "${version}"
 displayName = "Beings of Elderia"
-authors = "lwkysad, kyber-6"
+authors = "lwkysad, kyber-6, Pixel Dream Studios"
 description = '''
-This is an example description! Tell everyone what your mod is about!
+Discover a world where angels soar in the Aether and demons lurk in the Hell. Explore these mystical realms and encounter beings of immense power and ancient lore.
 '''
+displayURL="https://modrinth.com/mod/beings-of-elderia"
 logoFile = "icon.png"
 
 [[dependencies.beings_of_elderia]]

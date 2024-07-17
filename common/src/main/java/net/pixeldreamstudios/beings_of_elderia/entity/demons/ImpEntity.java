@@ -29,7 +29,8 @@ public class ImpEntity extends AbstractDemonEntity {
                 .add(Attributes.MAX_HEALTH, BeingsOfElderia.config.impHealth)
                 .add(Attributes.ATTACK_DAMAGE, BeingsOfElderia.config.impAttackDamage)
                 .add(Attributes.MOVEMENT_SPEED, 0.2)
-                .add(Attributes.FLYING_SPEED, 0.6);
+                .add(Attributes.FLYING_SPEED, 0.6)
+                .add(Attributes.FOLLOW_RANGE, 64);
     }
 
     @Override

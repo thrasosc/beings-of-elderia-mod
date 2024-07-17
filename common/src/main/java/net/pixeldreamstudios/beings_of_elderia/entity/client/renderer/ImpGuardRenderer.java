@@ -5,7 +5,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.pixeldreamstudios.beings_of_elderia.BeingsOfElderia;
 import net.pixeldreamstudios.beings_of_elderia.entity.demons.ImpGuardEntity;
 import net.pixeldreamstudios.beings_of_elderia.entity.client.model.ImpGuardModel;
-import net.pixeldreamstudios.beings_of_elderia.entity.client.renderer.abstraction.HeldItemRenderer;
 
 public class ImpGuardRenderer extends HeldItemRenderer<ImpGuardEntity> {
     public ImpGuardRenderer(EntityRendererProvider.Context ctx) {

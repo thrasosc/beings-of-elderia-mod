@@ -30,7 +30,12 @@ public class ImpGuardEntity extends AbstractDemonEntity {
                 .add(Attributes.ATTACK_DAMAGE, BeingsOfElderia.config.impGuardAttackDamage)
                 .add(Attributes.MOVEMENT_SPEED, 0.2)
                 .add(Attributes.FLYING_SPEED, 0.6)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0);
+                .add(Attributes.FOLLOW_RANGE, 64);
+    }
+
+    @Override
+    public void knockback(double x, double y, double z) {
+        super.knockback(0, 0, 0);
     }
 
     @Override

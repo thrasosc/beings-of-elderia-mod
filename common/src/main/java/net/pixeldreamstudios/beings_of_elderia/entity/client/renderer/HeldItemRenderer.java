@@ -1,4 +1,4 @@
-package net.pixeldreamstudios.beings_of_elderia.entity.client.renderer.abstraction;
+package net.pixeldreamstudios.beings_of_elderia.entity.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

@@ -17,7 +17,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.pixeldreamstudios.beings_of_elderia.entity.constant.DefaultAnimations;
+import net.pixeldreamstudios.beings_of_elderia.entity.constant.DefaultElderiaAnimations;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -47,14 +47,14 @@ public abstract class AbstractDemonEntity extends Monster implements SmartBrainO
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<>(this, "livingController", 5, event -> {
-            if ((event.isMoving()) && !swinging) {
-                return event.setAndContinue(DefaultAnimations.WALK);
+            if (event.isMoving() && !swinging) {
+                return event.setAndContinue(DefaultElderiaAnimations.WALK);
             }
-            return event.setAndContinue(DefaultAnimations.IDLE);
+            return event.setAndContinue(DefaultElderiaAnimations.IDLE);
         })).add(new AnimationController<>(this, "attackController", 0, event -> {
             swinging = false;
             return PlayState.STOP;
-        }).triggerableAnim("attack", DefaultAnimations.ATTACK));
+        }).triggerableAnim("attack", DefaultElderiaAnimations.ATTACK));
     }
 
     @Override
@@ -122,6 +122,11 @@ public abstract class AbstractDemonEntity extends Monster implements SmartBrainO
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
         this.playSound(SoundEvents.WOLF_STEP, 1.0f, 0.75f);
+    }
+
+    @Override
+    public boolean isLeftHanded() {
+        return false;
     }
 
     @Override

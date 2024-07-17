@@ -8,7 +8,7 @@ import mod.azure.azurelib.model.data.EntityModelData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.pixeldreamstudios.beings_of_elderia.BeingsOfElderia;
-import net.pixeldreamstudios.beings_of_elderia.entity.DemonEntity;
+import net.pixeldreamstudios.beings_of_elderia.entity.demons.DemonEntity;
 
 public class DemonModel extends GeoModel<DemonEntity> {
 

@@ -7,5 +7,13 @@
 
   "item.beings_of_elderia.demon_spawn_egg": "Demon Spawn Egg",
   "item.beings_of_elderia.imp_spawn_egg": "Imp Spawn Egg",
-  "item.beings_of_elderia.imp_guard_spawn_egg": "Imp Guard Spawn Egg"
+  "item.beings_of_elderia.imp_guard_spawn_egg": "Imp Guard Spawn Egg",
+
+  "config.screen.beings_of_elderia": "Beings of Elderia Config",
+  "config.beings_of_elderia.option.demonHealth": "Demon Health",
+  "config.beings_of_elderia.option.demonAttackDamage": "Demon Attack Damage",
+  "config.beings_of_elderia.option.impHealth": "Imp Health",
+  "config.beings_of_elderia.option.impAttackDamage": "Imp Attack Damage",
+  "config.beings_of_elderia.option.impGuardHealth": "Imp Guard Health",
+  "config.beings_of_elderia.option.impGuardAttackDamage": "Imp Guard Attack Damage"
 }

@@ -3,7 +3,7 @@ package net.pixeldreamstudios.beings_of_elderia.entity.client.renderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.pixeldreamstudios.beings_of_elderia.BeingsOfElderia;
-import net.pixeldreamstudios.beings_of_elderia.entity.DemonEntity;
+import net.pixeldreamstudios.beings_of_elderia.entity.demons.DemonEntity;
 import net.pixeldreamstudios.beings_of_elderia.entity.client.model.DemonModel;
 import net.pixeldreamstudios.beings_of_elderia.entity.client.renderer.abstraction.HeldItemRenderer;
 

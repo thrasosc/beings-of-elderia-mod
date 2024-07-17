@@ -14,10 +14,10 @@ import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.pixeldreamstudios.beings_of_elderia.BeingsOfElderia;
-import net.pixeldreamstudios.beings_of_elderia.entity.DemonEntity;
-import net.pixeldreamstudios.beings_of_elderia.entity.ImpEntity;
-import net.pixeldreamstudios.beings_of_elderia.entity.ImpGuardEntity;
-import net.pixeldreamstudios.beings_of_elderia.entity.abstraction.AbstractDemonEntity;
+import net.pixeldreamstudios.beings_of_elderia.entity.demons.DemonEntity;
+import net.pixeldreamstudios.beings_of_elderia.entity.demons.ImpEntity;
+import net.pixeldreamstudios.beings_of_elderia.entity.demons.ImpGuardEntity;
+import net.pixeldreamstudios.beings_of_elderia.entity.AbstractDemonEntity;
 
 public class EntityRegistry {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(BeingsOfElderia.MOD_ID, Registries.ENTITY_TYPE);

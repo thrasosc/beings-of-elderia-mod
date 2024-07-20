@@ -25,7 +25,7 @@ public class ImpGuardEntity extends AbstractDemonEntity {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return TamableAnimal.createMobAttributes()
+        return Monster.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, BeingsOfElderia.config.impGuardHealth)
                 .add(Attributes.ATTACK_DAMAGE, BeingsOfElderia.config.impGuardAttackDamage)
                 .add(Attributes.MOVEMENT_SPEED, 0.2)

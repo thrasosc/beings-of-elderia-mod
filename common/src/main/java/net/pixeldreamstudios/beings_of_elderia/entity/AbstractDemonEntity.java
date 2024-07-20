@@ -46,12 +46,12 @@ public abstract class AbstractDemonEntity extends Monster implements SmartBrainO
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, "livingController", 5, event -> {
+        controllerRegistrar.add(new AnimationController<>(this, "livingController", 3, event -> {
             if (event.isMoving() && !swinging) {
                 return event.setAndContinue(DefaultElderiaAnimations.WALK);
             }
             return event.setAndContinue(DefaultElderiaAnimations.IDLE);
-        })).add(new AnimationController<>(this, "attackController", 0, event -> {
+        })).add(new AnimationController<>(this, "attackController", 3, event -> {
             swinging = false;
             return PlayState.STOP;
         }).triggerableAnim("attack", DefaultElderiaAnimations.ATTACK));

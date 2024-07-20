@@ -8,7 +8,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
-import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
@@ -56,7 +55,7 @@ public class DemonEntity extends AbstractDemonEntity {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return TamableAnimal.createMobAttributes()
+        return Monster.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, BeingsOfElderia.config.demonHealth)
                 .add(Attributes.ATTACK_DAMAGE, BeingsOfElderia.config.demonAttackDamage)
                 .add(Attributes.MOVEMENT_SPEED, 0.55)
@@ -76,12 +75,12 @@ public class DemonEntity extends AbstractDemonEntity {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, "livingController", 5, event -> {
+        controllerRegistrar.add(new AnimationController<>(this, "livingController", 3, event -> {
             if (!onGround()) {
                 return event.setAndContinue(DefaultElderiaAnimations.FLY);
             }
             return event.setAndContinue(DefaultElderiaAnimations.IDLE);
-        })).add(new AnimationController<>(this, "attackController", 0, event -> {
+        })).add(new AnimationController<>(this, "attackController", 3, event -> {
             swinging = false;
             return PlayState.STOP;
         }).triggerableAnim("attack", DefaultElderiaAnimations.ATTACK));

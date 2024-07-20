@@ -15,5 +15,6 @@
   "config.beings_of_elderia.option.impHealth": "Imp Health",
   "config.beings_of_elderia.option.impAttackDamage": "Imp Attack Damage",
   "config.beings_of_elderia.option.impGuardHealth": "Imp Guard Health",
-  "config.beings_of_elderia.option.impGuardAttackDamage": "Imp Guard Attack Damage"
+  "config.beings_of_elderia.option.impGuardAttackDamage": "Imp Guard Attack Damage",
+  "config.beings_of_elderia.option.impGuardArmor": "Imp Guard Armor"
 }

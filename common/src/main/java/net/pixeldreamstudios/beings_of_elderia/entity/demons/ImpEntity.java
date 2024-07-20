@@ -34,7 +34,7 @@ public class ImpEntity extends AbstractDemonEntity {
         super(entityType, level);
         this.navigation = new SmoothGroundNavigation(this, level());
         if (RandomUtil.fiftyFifty()) {
-            this.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.STONE_AXE));
+            this.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.NETHERITE_AXE));
         }
     }
 
@@ -43,7 +43,7 @@ public class ImpEntity extends AbstractDemonEntity {
                 .add(Attributes.MAX_HEALTH, BeingsOfElderia.config.impHealth)
                 .add(Attributes.ATTACK_DAMAGE, BeingsOfElderia.config.impAttackDamage)
                 .add(Attributes.MOVEMENT_SPEED, 0.2)
-                .add(Attributes.FLYING_SPEED, 0.6)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.5)
                 .add(Attributes.FOLLOW_RANGE, 64);
     }
 
@@ -68,12 +68,12 @@ public class ImpEntity extends AbstractDemonEntity {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, "livingController", 3, event -> {
+        controllerRegistrar.add(new AnimationController<>(this, "livingController", 5, event -> {
             if (event.isMoving() && !swinging) {
                 return event.setAndContinue(DefaultElderiaAnimations.WALK);
             }
             return event.setAndContinue(DefaultElderiaAnimations.IDLE);
-        })).add(new AnimationController<>(this, "attackController", 3, event -> {
+        })).add(new AnimationController<>(this, "attackController", 5, event -> {
             swinging = false;
             return PlayState.STOP;
         }).triggerableAnim("attack", DefaultElderiaAnimations.ATTACK)

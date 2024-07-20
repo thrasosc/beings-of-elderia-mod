@@ -75,12 +75,12 @@ public class DemonEntity extends AbstractDemonEntity {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, "livingController", 3, event -> {
+        controllerRegistrar.add(new AnimationController<>(this, "livingController", 5, event -> {
             if (!onGround()) {
                 return event.setAndContinue(DefaultElderiaAnimations.FLY);
             }
             return event.setAndContinue(DefaultElderiaAnimations.IDLE);
-        })).add(new AnimationController<>(this, "attackController", 3, event -> {
+        })).add(new AnimationController<>(this, "attackController", 5, event -> {
             swinging = false;
             return PlayState.STOP;
         }).triggerableAnim("attack", DefaultElderiaAnimations.ATTACK));

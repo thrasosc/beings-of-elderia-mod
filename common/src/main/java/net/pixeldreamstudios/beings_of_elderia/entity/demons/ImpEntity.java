@@ -5,15 +5,23 @@ import mod.azure.azurelib.core.animation.Animation;
 import mod.azure.azurelib.core.animation.AnimationController;
 import mod.azure.azurelib.core.animation.RawAnimation;
 import mod.azure.azurelib.core.object.PlayState;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.pixeldreamstudios.beings_of_elderia.BeingsOfElderia;
 import net.pixeldreamstudios.beings_of_elderia.entity.AbstractDemonEntity;
 import net.pixeldreamstudios.beings_of_elderia.entity.constant.DefaultElderiaAnimations;
@@ -23,8 +31,10 @@ import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetWalkTargetToAtt
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.InvalidateAttackTarget;
 import net.tslat.smartbrainlib.api.core.navigation.SmoothGroundNavigation;
 import net.tslat.smartbrainlib.util.RandomUtil;
+import org.jetbrains.annotations.Nullable;
 
 public class ImpEntity extends AbstractDemonEntity {
+    protected static final EntityDataAccessor<Boolean> AXE_WIELDER = SynchedEntityData.defineId(ImpEntity.class, EntityDataSerializers.BOOLEAN);
     private static final String[] animations = {"claw_attack_right", "claw_attack_left", "claw_attack_double"};
     public static final RawAnimation CLAW_ATTACK_RIGHT = RawAnimation.begin().then(animations[0], Animation.LoopType.PLAY_ONCE);
     public static final RawAnimation CLAW_ATTACK_LEFT = RawAnimation.begin().then(animations[1], Animation.LoopType.PLAY_ONCE);
@@ -33,9 +43,39 @@ public class ImpEntity extends AbstractDemonEntity {
     public ImpEntity(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
         this.navigation = new SmoothGroundNavigation(this, level());
-        if (RandomUtil.fiftyFifty()) {
-            this.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.NETHERITE_AXE));
-        }
+    }
+
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType spawnReason, @Nullable SpawnGroupData entityData, @Nullable CompoundTag entityNbt) {
+        setAxeWielder(RandomUtil.fiftyFifty());
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt);
+    }
+
+    private void setAxeWielder(boolean b) {
+        this.entityData.set(AXE_WIELDER, b);
+        if (b) this.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.NETHERITE_AXE));
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(AXE_WIELDER, false);
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag nbt) {
+        super.addAdditionalSaveData(nbt);
+        nbt.putBoolean("IsAxeWielder", this.entityData.get(AXE_WIELDER));
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag nbt) {
+        super.readAdditionalSaveData(nbt);
+        this.entityData.set(AXE_WIELDER, nbt.getBoolean("IsAxeWielder"));
+    }
+
+    public boolean isAxeWielder() {
+        return this.entityData.get(AXE_WIELDER);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -52,11 +92,11 @@ public class ImpEntity extends AbstractDemonEntity {
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>().invalidateIf((target, entity) -> !target.isAlive() || !entity.hasLineOfSight(target)),
                 new SetWalkTargetToAttackTarget<>()
-                        .speedMod((mob, livingEntity) -> isHoldingWeapon() ? 1.2f : 1.5f),
+                        .speedMod((mob, livingEntity) -> isAxeWielder() ? 1.2f : 1.5f),
                 new AnimatableMeleeAttack<>(12)
-                        .attackInterval(mob -> isHoldingWeapon() ? 40 : 20)
+                        .attackInterval(mob -> isAxeWielder() ? 40 : 20)
                         .whenStarting(mob -> {
-                            if (isHoldingWeapon()) {
+                            if (isAxeWielder()) {
                                 this.triggerAnim("attackController", "attack");
                             }
                             else {
@@ -84,13 +124,9 @@ public class ImpEntity extends AbstractDemonEntity {
 
     @Override
     public boolean isWithinMeleeAttackRange(LivingEntity entity) {
-        if (isHoldingWeapon())
+        if (isAxeWielder())
             return super.isWithinMeleeAttackRange(entity);
         var attackBox = this.getBoundingBox().inflate(1.5);
         return attackBox.intersects(entity.getBoundingBox());
-    }
-
-    private boolean isHoldingWeapon() {
-        return !getItemInHand(InteractionHand.MAIN_HAND).isEmpty();
     }
 }

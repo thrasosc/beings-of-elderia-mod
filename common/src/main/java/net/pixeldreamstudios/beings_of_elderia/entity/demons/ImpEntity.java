@@ -91,19 +91,41 @@ public class ImpEntity extends AbstractDemonEntity {
     public BrainActivityGroup<AbstractDemonEntity> getFightTasks() {
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>().invalidateIf((target, entity) -> !target.isAlive() || !entity.hasLineOfSight(target)),
-                new SetWalkTargetToAttackTarget<>()
-                        .speedMod((mob, livingEntity) -> isAxeWielder() ? 1.2f : 1.5f),
+
+                new SetWalkTargetToAttackTarget<>().speedMod(this::stalkOrHideSpeedMod),
+
+                // Attack logic
                 new AnimatableMeleeAttack<>(12)
                         .attackInterval(mob -> isAxeWielder() ? 40 : 20)
                         .whenStarting(mob -> {
                             if (isAxeWielder()) {
                                 this.triggerAnim("attackController", "attack");
-                            }
-                            else {
+                            } else {
                                 this.triggerAnim("attackController", RandomUtil.getRandomSelection(animations));
                             }
                         })
         );
+    }
+
+    /**
+     * Custom speed modifier for stalking or hiding behavior based on the target's visibility.
+     */
+    private float stalkOrHideSpeedMod(LivingEntity mob, LivingEntity target) {
+        if (target == null) return 1.0f;
+
+        // Logging to see if visibility and proximity are detected correctly
+        boolean canSeeTarget = mob.hasLineOfSight(target);
+        double distance = mob.distanceTo(target);
+        // If target is not visible, the Imp "hides" (moves slower)
+        if (!canSeeTarget) {
+            return 0.5f;  // Hide behavior
+        }
+        // If target is far but visible, "stalk" (move slowly)
+        if (distance > 10.0) {
+            return 1.0f;  // Stalk behavior
+        }
+        // If target is close and visible, move quickly to attack
+        return 1.5f;
     }
 
     @Override

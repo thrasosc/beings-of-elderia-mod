@@ -37,15 +37,35 @@ public class EntityRegistry {
                     .sized(0.75f, 1.25f)
                     .build(new ResourceLocation(BeingsOfElderia.MOD_ID, "imp_guard").toString()));
 
+
+
     private static void initSpawns() {
-        SpawnPlacementsRegistry.register(EntityRegistry.DEMON, SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AbstractDemonEntity::checkAnyLightMonsterSpawnRules);
-        BiomeModifications.addProperties(b -> b.hasTag(BiomeTags.IS_NETHER), (ctx, b) -> b.getSpawnProperties().addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(DEMON.get(), 60, 6, 12)));
+        // Demon spawn rules
+        if (BeingsOfElderia.config.demonSpawnWeight > 0) {
+            SpawnPlacementsRegistry.register(EntityRegistry.DEMON, SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AbstractDemonEntity::checkAnyLightMonsterSpawnRules);
+            BiomeModifications.addProperties(b -> b.hasTag(BiomeTags.IS_NETHER), (ctx, b) -> b.getSpawnProperties().addSpawn(
+                    MobCategory.MONSTER,
+                    new MobSpawnSettings.SpawnerData(DEMON.get(), BeingsOfElderia.config.demonSpawnWeight, 6, 12)
+            ));
+        }
 
-        SpawnPlacementsRegistry.register(EntityRegistry.IMP, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AbstractDemonEntity::checkAnyLightMonsterSpawnRules);
-        BiomeModifications.addProperties(b -> b.hasTag(BiomeTags.IS_NETHER), (ctx, b) -> b.getSpawnProperties().addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(IMP.get(), 50, 2, 6)));
+        // Imp spawn rules
+        if (BeingsOfElderia.config.impSpawnWeight > 0) {
+            SpawnPlacementsRegistry.register(EntityRegistry.IMP, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AbstractDemonEntity::checkAnyLightMonsterSpawnRules);
+            BiomeModifications.addProperties(b -> b.hasTag(BiomeTags.IS_NETHER), (ctx, b) -> b.getSpawnProperties().addSpawn(
+                    MobCategory.MONSTER,
+                    new MobSpawnSettings.SpawnerData(IMP.get(), BeingsOfElderia.config.impSpawnWeight, 2, 6)
+            ));
+        }
 
-        SpawnPlacementsRegistry.register(EntityRegistry.IMP_GUARD, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AbstractDemonEntity::checkAnyLightMonsterSpawnRules);
-        BiomeModifications.addProperties(b -> b.hasTag(BiomeTags.IS_NETHER), (ctx, b) -> b.getSpawnProperties().addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(IMP_GUARD.get(), 40, 2, 6)));
+        // Imp Guard spawn rules
+        if (BeingsOfElderia.config.impGuardSpawnWeight > 0) {
+            SpawnPlacementsRegistry.register(EntityRegistry.IMP_GUARD, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AbstractDemonEntity::checkAnyLightMonsterSpawnRules);
+            BiomeModifications.addProperties(b -> b.hasTag(BiomeTags.IS_NETHER), (ctx, b) -> b.getSpawnProperties().addSpawn(
+                    MobCategory.MONSTER,
+                    new MobSpawnSettings.SpawnerData(IMP_GUARD.get(), BeingsOfElderia.config.impGuardSpawnWeight, 2, 6)
+            ));
+        }
     }
 
     private static void initAttributes() {

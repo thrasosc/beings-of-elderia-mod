@@ -28,4 +28,17 @@ public class BeingsOfElderiaConfig {
     @Configurable
     @Configurable.Synchronized
     public double impGuardArmor = 6.0;
+
+    // Spawn weights (set to 0 to disable spawning)
+    @Configurable
+    @Configurable.Synchronized
+    public int demonSpawnWeight = 10;
+
+    @Configurable
+    @Configurable.Synchronized
+    public int impSpawnWeight = 10;
+
+    @Configurable
+    @Configurable.Synchronized
+    public int impGuardSpawnWeight = 10;
 }

@@ -7,7 +7,7 @@ license = "MIT"
 modId = "beings_of_elderia"
 version = "${version}"
 displayName = "Beings of Elderia"
-authors = "lwkysad, kyber-6, Pixel Dream Studios"
+authors = "lwkysad, thrasos, BanditBytes, Pixel Dream Studios"
 description = '''
 Discover a world where angels soar in the Aether and demons lurk in the Hell. Explore these mystical realms and encounter beings of immense power and ancient lore.
 '''

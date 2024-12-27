@@ -1,5 +1,6 @@
 package net.pixeldreamstudios.beings_of_elderia.entity.ai.goal;
 
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.control.MoveControl;
@@ -10,57 +11,63 @@ import java.util.EnumSet;
 
 public class RandomFlyConvergeOnTargetGoal extends Goal {
     private final DemonEntity parentEntity;
+    private LivingEntity target;
 
-    /**
-     * @param entity Entity that is flying
-     */
     public RandomFlyConvergeOnTargetGoal(DemonEntity entity) {
         this.parentEntity = entity;
         this.setFlags(EnumSet.of(Flag.MOVE));
     }
 
+    @Override
     public boolean canUse() {
-        MoveControl movementcontroller = this.parentEntity.getMoveControl();
-        if (!movementcontroller.hasWanted()) {
-            return true;
-        } else {
-            double d0 = movementcontroller.getWantedX() - this.parentEntity.getX();
-            double d1 = movementcontroller.getWantedY() - this.parentEntity.getY();
-            double d2 = movementcontroller.getWantedZ() - this.parentEntity.getZ();
-            double d3 = d0 * d0 + d1 * d1 + d2 * d2;
-            return d3 < 1.0D || d3 > 10.0D;
+        MoveControl movementController = this.parentEntity.getMoveControl();
+        target = this.parentEntity.getTarget();
+        if (target == null || !target.isAlive()) {
+            return false;
         }
+
+        return !movementController.hasWanted() || this.parentEntity.distanceToSqr(target) > 2.0D;
     }
 
     @Override
     public boolean canContinueToUse() {
-        return false;
-    }
-
-    public boolean shouldConverge(LivingEntity target) {
-        return target != null && this.parentEntity.distanceToSqr(target) >= 225;
+        return target != null && target.isAlive() && this.parentEntity.distanceToSqr(target) > 2.0D;
     }
 
     @Override
     public void start() {
-        LivingEntity target = this.parentEntity.getTarget();
-        boolean converge = shouldConverge(target);
-        RandomSource random = this.parentEntity.getRandom();
-        double d0 = this.parentEntity.getX() + ((random.nextFloat() * 2.0F - 1.0F) * 2.0F);
-        double d1 = this.parentEntity.getY() + ((random.nextFloat() * 2.0F - 1.0F) * 2.0F);
-        double d2 = this.parentEntity.getZ() + ((random.nextFloat() * 2.0F - 1.0F) * 2.0F);
-
-        if (converge) {
-            assert target != null;
-            double xDifference = target.getX() - this.parentEntity.getX();
-            double yDifference = target.getY() - this.parentEntity.getY();
-            double zDifference = target.getZ() - this.parentEntity.getZ();
-            double maxAbs = Math.max(Math.abs(xDifference), Math.abs(yDifference));
-            maxAbs = Math.max(maxAbs, Math.abs(zDifference));
-            d0 += 2 * xDifference / maxAbs * 0.5;
-            d1 += 2 * yDifference / maxAbs * 0.5;
-            d2 += 2 * zDifference / maxAbs * 0.5;
+        if (target != null) {
+            moveTowardsTarget();
         }
-        this.parentEntity.getMoveControl().setWantedPosition(d0, d1, d2, 2);
+    }
+
+    @Override
+    public void tick() {
+        if (target != null && target.isAlive()) {
+            moveTowardsTarget();
+            rotateTowardsTarget();
+        }
+    }
+
+    private void moveTowardsTarget() {
+        double d0 = target.getX();
+        double d1 = target.getY() + target.getEyeHeight();
+        double d2 = target.getZ();
+
+        this.parentEntity.getMoveControl().setWantedPosition(d0, d1, d2, 1.5);
+    }
+
+    private void rotateTowardsTarget() {
+        double dx = target.getX() - this.parentEntity.getX();
+        double dz = target.getZ() - this.parentEntity.getZ();
+
+        float targetYaw = (float) (Mth.atan2(dz, dx) * (180.0F / Math.PI)) - 90.0F;
+        this.parentEntity.setYRot(this.rotlerp(this.parentEntity.getYRot(), targetYaw, 10.0F));
+        this.parentEntity.yHeadRot = this.parentEntity.getYRot(); // Sync head rotation with body
+    }
+
+    private float rotlerp(float current, float target, float maxChange) {
+        float delta = Mth.wrapDegrees(target - current);
+        return current + Mth.clamp(delta, -maxChange, maxChange);
     }
 }

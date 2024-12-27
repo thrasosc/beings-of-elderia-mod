@@ -16,5 +16,8 @@
   "config.beings_of_elderia.option.impAttackDamage": "Imp Attack Damage",
   "config.beings_of_elderia.option.impGuardHealth": "Imp Guard Health",
   "config.beings_of_elderia.option.impGuardAttackDamage": "Imp Guard Attack Damage",
-  "config.beings_of_elderia.option.impGuardArmor": "Imp Guard Armor"
+  "config.beings_of_elderia.option.impGuardArmor": "Imp Guard Armor",
+  "config.beings_of_elderia.option.demonSpawnWeight": "Demon Spawn Weight (0 to disable)",
+  "config.beings_of_elderia.option.impSpawnWeight": "Imp Spawn Weight (0 to disable)",
+  "config.beings_of_elderia.option.impGuardSpawnWeight": "Imp Guard Spawn Weight (0 to disable)"
 }

@@ -28,6 +28,7 @@ import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.behaviour.FirstApplicableBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.OneRandomBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.AnimatableMeleeAttack;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtAttackTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.Idle;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.FloatToSurfaceOfFluid;
@@ -79,7 +80,7 @@ public class DemonEntity extends AbstractDemonEntity {
             if (!onGround()) {
                 return event.setAndContinue(DefaultElderiaAnimations.FLY);
             }
-            return event.setAndContinue(DefaultElderiaAnimations.IDLE);
+            return event.setAndContinue(DefaultElderiaAnimations.FLY);
         })).add(new AnimationController<>(this, "attackController", 5, event -> {
             swinging = false;
             return PlayState.STOP;

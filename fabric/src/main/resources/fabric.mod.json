@@ -6,13 +6,14 @@
   "description": "Discover a world where angels soar in the Aether and demons lurk in the Hell. Explore these mystical realms and encounter beings of immense power and ancient lore.",
   "authors": [
     "lwkysad",
-    "kyber-6",
+    "Thrasos",
+    "Bandit-Bytes",
     "Pixel Dream Studios"
   ],
   "contact": {
     "homepage": "https://modrinth.com/mod/beings-of-elderia",
-    "sources": "https://github.com/kyber-6/beings-of-elderia-mod",
-    "issues": "https://github.com/kyber-6/beings-of-elderia-mod/issues"
+    "sources": "https://github.com/thrasosc/beings-of-elderia-mod",
+    "issues": "https://github.com/thrasosc/beings-of-elderia-mod/issues"
   },
   "license": "MIT",
   "icon": "icon.png",
@@ -34,7 +35,7 @@
     "java": ">=17",
     "architectury": ">=9.2.14",
     "fabric-api": "*",
-    "azurelib": "2.0.30",
+    "azurelib": "2.0.31",
     "smartbrainlib": ">=1.14.2"
   }
 }
